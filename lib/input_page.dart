@@ -15,7 +15,10 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Color _unselectedColor;
   Color _selectedColor;
+  int minHeightInCm = 80;
+  int maxHeightInCm = 220;
   Gender gender;
+  int heightInCm = 180;
 
   @override
   void didChangeDependencies() {
@@ -32,6 +35,7 @@ class _InputPageState extends State<InputPage> {
           title: Text('BMI CALCULATOR'),
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
               child: Row(
@@ -43,9 +47,7 @@ class _InputPageState extends State<InputPage> {
                           gender = Gender.male;
                         });
                       },
-                      color: gender == Gender.male
-                          ? _selectedColor
-                          : _unselectedColor,
+                      color: gender == Gender.male ? _selectedColor : _unselectedColor,
                       child: GenderInfo(
                         icon: FaIcon(FontAwesomeIcons.mars).icon,
                         iconHeight: iconHeight,
@@ -60,9 +62,7 @@ class _InputPageState extends State<InputPage> {
                           gender = Gender.female;
                         });
                       },
-                      color: gender == Gender.female
-                          ? _selectedColor
-                          : _unselectedColor,
+                      color: gender == Gender.female ? _selectedColor : _unselectedColor,
                       child: GenderInfo(
                         icon: FaIcon(FontAwesomeIcons.venus).icon,
                         iconHeight: iconHeight,
@@ -79,6 +79,43 @@ class _InputPageState extends State<InputPage> {
                   Expanded(
                     child: RoundedCard(
                       color: Theme.of(context).cardColor,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'HEIGHT',
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
+                            children: [
+                              Text(
+                                heightInCm.toString(),
+                                style: Theme.of(context).textTheme.headline3,
+                              ),
+                              Text(
+                                'cm',
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 24,
+                            ),
+                            child: Slider(
+                              value: heightInCm.toDouble(),
+                              min: minHeightInCm.toDouble(),
+                              max: maxHeightInCm.toDouble(),
+                              onChanged: (val) {
+                                setState(() {
+                                  heightInCm = val.round();
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -101,7 +138,7 @@ class _InputPageState extends State<InputPage> {
               ),
             ),
             Container(
-              color: Theme.of(context).buttonColor,
+              color: Theme.of(context).accentColor,
               margin: EdgeInsets.only(top: 10),
               width: double.infinity,
               height: bottomContainerHeight,
