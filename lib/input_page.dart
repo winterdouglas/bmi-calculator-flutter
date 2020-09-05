@@ -43,7 +43,9 @@ class _InputPageState extends State<InputPage> {
                           gender = Gender.male;
                         });
                       },
-                      color: gender == Gender.male ? _selectedColor : _unselectedColor,
+                      color: gender == Gender.male
+                          ? _selectedColor
+                          : _unselectedColor,
                       child: GenderInfo(
                         icon: FaIcon(FontAwesomeIcons.mars).icon,
                         iconHeight: iconHeight,
@@ -58,7 +60,9 @@ class _InputPageState extends State<InputPage> {
                           gender = Gender.female;
                         });
                       },
-                      color: gender == Gender.female ? _selectedColor : _unselectedColor,
+                      color: gender == Gender.female
+                          ? _selectedColor
+                          : _unselectedColor,
                       child: GenderInfo(
                         icon: FaIcon(FontAwesomeIcons.venus).icon,
                         iconHeight: iconHeight,
