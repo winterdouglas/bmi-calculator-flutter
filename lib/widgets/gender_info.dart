@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../styles.dart';
 
 class GenderInfo extends StatelessWidget {
   const GenderInfo({
@@ -26,10 +27,6 @@ class GenderInfo extends StatelessWidget {
         ),
         Text(
           text,
-          style: TextStyle(
-            fontSize: 18,
-            color: Color(0xFF8D8E98),
-          ),
         )
       ],
     );
