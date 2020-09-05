@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'colors.dart';
 import 'gender.dart';
 import 'sizes.dart';
+import 'widgets/colored_button.dart';
 import 'widgets/numeric_up_down.dart';
 import 'widgets/rounded_card.dart';
 import 'widgets/gender_info.dart';
@@ -190,20 +191,11 @@ class _InputPageState extends State<InputPage> {
             SizedBox(
               height: 5,
             ),
-            Material(
-              color: Theme.of(context).accentColor,
-              child: InkWell(
-                onTap: () => {},
-                child: Container(
-                  height: kBottomContainerHeight,
-                  child: Center(
-                    child: Text(
-                      'CALCULATE',
-                      style: Theme.of(context).textTheme.bodyText1,
-                    ),
-                  ),
-                ),
-              ),
+            ColoredButton(
+              text: 'CALCULATE',
+              onPressed: () {
+                Navigator.of(context).pushNamed('/results');
+              },
             ),
           ],
         ));
