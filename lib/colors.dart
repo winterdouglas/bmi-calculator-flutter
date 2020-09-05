@@ -6,7 +6,7 @@ const Color kAccentColor = Color(0xFFEB1555);
 // Card
 const Color kUnselectedWidgetColor = Color(0xFF111328);
 const Color kSelectedWidgetColor = Color(0xFF1D1E33);
-const Color kCardColor = Color(0xFF1D1E33);
+const Color kCardColor = Color(0xFF111328);
 
 // Text
 const Color kBodyText2Color = Color(0xFF8D8E98);
@@ -15,3 +15,6 @@ const Color kBodyText1Color = Color(0xFFFFFFFF);
 // Slider
 const Color kSliderActiveTrackColor = Color(0xFFFFFFFF);
 const Color kSliderInactiveTrackColor = Color(0xFF888993);
+
+// Button
+const Color kButtonColor = Color(0xFF1C1F32);

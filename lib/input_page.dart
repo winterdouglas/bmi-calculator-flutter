@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'colors.dart';
 import 'gender.dart';
+import 'sizes.dart';
+import 'widgets/numeric_up_down.dart';
 import 'widgets/rounded_card.dart';
 import 'widgets/gender_info.dart';
-
-const bottomContainerHeight = 80.0;
-const iconHeight = 80.0;
 
 class InputPage extends StatefulWidget {
   @override
@@ -13,23 +13,21 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Color _unselectedColor;
-  Color _selectedColor;
-  int minHeightInCm = 80;
-  int maxHeightInCm = 220;
+  int _minHeightInCm = 80;
+  int _maxHeightInCm = 220;
+
   Gender gender;
-  int heightInCm = 180;
-
-  @override
-  void didChangeDependencies() {
-    _unselectedColor = Theme.of(context).unselectedWidgetColor;
-    _selectedColor = Theme.of(context).toggleableActiveColor;
-
-    super.didChangeDependencies();
-  }
+  int height = 180;
+  int weight = 60;
+  int age = 30;
 
   @override
   Widget build(BuildContext context) {
+    final unselectedColor = Theme.of(context).unselectedWidgetColor;
+    final selectedColor = Theme.of(context).toggleableActiveColor;
+    final selectedIconColor = Theme.of(context).textTheme.bodyText1.color;
+    final unselectedIconColor = Theme.of(context).textTheme.bodyText2.color;
+
     return Scaffold(
         appBar: AppBar(
           title: Text('BMI CALCULATOR'),
@@ -37,6 +35,9 @@ class _InputPageState extends State<InputPage> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            SizedBox(
+              height: 5,
+            ),
             Expanded(
               child: Row(
                 children: [
@@ -47,10 +48,11 @@ class _InputPageState extends State<InputPage> {
                           gender = Gender.male;
                         });
                       },
-                      color: gender == Gender.male ? _selectedColor : _unselectedColor,
+                      color: gender == Gender.male ? selectedColor : unselectedColor,
                       child: GenderInfo(
+                        iconColor: gender == Gender.male ? selectedIconColor : unselectedIconColor,
                         icon: FaIcon(FontAwesomeIcons.mars).icon,
-                        iconHeight: iconHeight,
+                        iconHeight: kIconHeight,
                         text: 'MALE',
                       ),
                     ),
@@ -62,10 +64,14 @@ class _InputPageState extends State<InputPage> {
                           gender = Gender.female;
                         });
                       },
-                      color: gender == Gender.female ? _selectedColor : _unselectedColor,
+                      color: gender == Gender.female ? selectedColor : unselectedColor,
                       child: GenderInfo(
-                        icon: FaIcon(FontAwesomeIcons.venus).icon,
-                        iconHeight: iconHeight,
+                        iconColor: gender == Gender.female ? selectedIconColor : unselectedIconColor,
+                        icon: FaIcon(
+                          FontAwesomeIcons.venus,
+                          color: kBodyText2Color,
+                        ).icon,
+                        iconHeight: kIconHeight,
                         text: 'FEMALE',
                       ),
                     ),
@@ -91,7 +97,7 @@ class _InputPageState extends State<InputPage> {
                             textBaseline: TextBaseline.alphabetic,
                             children: [
                               Text(
-                                heightInCm.toString(),
+                                height.toString(),
                                 style: Theme.of(context).textTheme.headline3,
                               ),
                               Text(
@@ -104,12 +110,12 @@ class _InputPageState extends State<InputPage> {
                               horizontal: 24,
                             ),
                             child: Slider(
-                              value: heightInCm.toDouble(),
-                              min: minHeightInCm.toDouble(),
-                              max: maxHeightInCm.toDouble(),
+                              value: height.toDouble(),
+                              min: _minHeightInCm.toDouble(),
+                              max: _maxHeightInCm.toDouble(),
                               onChanged: (val) {
                                 setState(() {
-                                  heightInCm = val.round();
+                                  height = val.round();
                                 });
                               },
                             ),
@@ -127,21 +133,77 @@ class _InputPageState extends State<InputPage> {
                   Expanded(
                     child: RoundedCard(
                       color: Theme.of(context).cardColor,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('WEIGHT'),
+                          Text(
+                            weight.toString(),
+                            style: Theme.of(context).textTheme.headline3,
+                          ),
+                          NumericUpDown(
+                            onRemovePressed: () {
+                              setState(() {
+                                weight--;
+                              });
+                            },
+                            onAddPressed: () {
+                              setState(() {
+                                weight++;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   Expanded(
                     child: RoundedCard(
                       color: Theme.of(context).cardColor,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('AGE'),
+                          Text(
+                            age.toString(),
+                            style: Theme.of(context).textTheme.headline3,
+                          ),
+                          NumericUpDown(
+                            onRemovePressed: () {
+                              setState(() {
+                                age--;
+                              });
+                            },
+                            onAddPressed: () {
+                              setState(() {
+                                age++;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
-            Container(
+            SizedBox(
+              height: 5,
+            ),
+            Material(
               color: Theme.of(context).accentColor,
-              margin: EdgeInsets.only(top: 10),
-              width: double.infinity,
-              height: bottomContainerHeight,
+              child: InkWell(
+                onTap: () => {},
+                child: Container(
+                  height: kBottomContainerHeight,
+                  child: Center(
+                    child: Text(
+                      'CALCULATE',
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                  ),
+                ),
+              ),
             ),
           ],
         ));

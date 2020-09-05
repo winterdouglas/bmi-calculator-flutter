@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'colors.dart';
 import 'sizes.dart';
 
+const kBodyText1Style = TextStyle(
+  fontSize: kBodyTextSize,
+  color: kBodyText1Color,
+);
+
 const kBodyText2Style = TextStyle(
   fontSize: kBodyTextSize,
   color: kBodyText2Color,

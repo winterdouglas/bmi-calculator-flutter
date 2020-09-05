@@ -13,7 +13,7 @@ class BMICalculator extends StatelessWidget {
         scaffoldBackgroundColor: kPrimaryColor,
         primaryColor: kPrimaryColor,
         accentColor: kAccentColor,
-        buttonColor: kAccentColor,
+        buttonColor: kButtonColor,
         unselectedWidgetColor: kUnselectedWidgetColor,
         toggleableActiveColor: kSelectedWidgetColor,
         cardColor: kCardColor,
@@ -31,6 +31,7 @@ class BMICalculator extends StatelessWidget {
               overlayRadius: 25,
             )),
         textTheme: ThemeData.dark().textTheme.copyWith(
+              bodyText1: kBodyText1Style,
               bodyText2: kBodyText2Style,
               headline3: kHeading3Style,
             ),

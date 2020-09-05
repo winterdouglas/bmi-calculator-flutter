@@ -18,7 +18,7 @@ class RoundedCard extends StatelessWidget {
       onTap: onPress,
       child: Container(
         child: child,
-        margin: EdgeInsets.all(10),
+        margin: EdgeInsets.all(5),
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(10),

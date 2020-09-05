@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
-import '../styles.dart';
 
 class GenderInfo extends StatelessWidget {
-  const GenderInfo({
-    Key key,
-    @required this.icon,
-    @required this.iconHeight,
-    @required this.text,
-  }) : super(key: key);
+  const GenderInfo({Key key, @required this.icon, @required this.iconHeight, @required this.text, this.iconColor}) : super(key: key);
 
   final IconData icon;
   final double iconHeight;
   final String text;
+  final Color iconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +15,7 @@ class GenderInfo extends StatelessWidget {
       children: [
         Icon(
           icon,
+          color: iconColor ?? IconTheme.of(context).color,
           size: iconHeight,
         ),
         SizedBox(
